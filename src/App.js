@@ -4,7 +4,7 @@ import { useState } from "react";
 import ButtonGroup from "./components/ButtonGroup";
 
 function App() {
-  const [colorCode, setColorCode] = useState("#ad3c00");
+  const [colorCode, setColorCode] = useState(generateColorCode());
 
   return (
     <div className="App">
@@ -17,5 +17,15 @@ function App() {
     </div>
   );
 }
+
+const generateColorCode = () => {
+  let color_code = "";
+  const strings = "1234567890ABCDEF";
+  for (let i = 0; i < 6; i++) {
+    color_code += strings.charAt(Math.floor(Math.random() * strings.length));
+  }
+
+  return "#" + color_code;
+};
 
 export default App;
