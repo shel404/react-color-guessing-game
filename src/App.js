@@ -1,18 +1,33 @@
 import ColorBox from "./components/ColorBox";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonGroup from "./components/ButtonGroup";
+import Check from "./components/Check";
 
 function App() {
   const [colorCode, setColorCode] = useState(generateColorCode());
   const [submittedAnswer, setSubmittedAnswer] = useState("");
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [showInfo, setShowInfo] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("highScore")) {
+      setHighScore(localStorage.getItem("highScore"));
+    } else {
+      localStorage.setItem("highScore", 0);
+      setHighScore(0);
+    }
+  }, []);
 
   const handleSubmittedAnswer = (answer) => {
     setSubmittedAnswer(answer);
     if (answer === colorCode) {
       setScore(score + 1);
+      if (score + 1 > highScore) {
+        setHighScore(score + 1);
+        localStorage.setItem("highScore", score + 1);
+      }
     } else {
       setScore(0);
     }
@@ -30,8 +45,13 @@ function App() {
     <div className="App">
       <div className="main-container">
         <h2>Guess The Color Code!</h2>
+        <div></div>
+
         <hr />
-        <div className="scoreboard">Streak: {score}</div>
+        <div className="scoreboard">
+          <div>Streak: {score}</div>
+          <div>Highest Streak: {highScore}</div>
+        </div>
         <ColorBox colorCode={colorCode} />
         <ButtonGroup
           colorCode={colorCode}
@@ -40,7 +60,9 @@ function App() {
         {submittedAnswer && showInfo ? (
           <div className="info-text">
             {submittedAnswer === colorCode ? (
-              <div>Correct!</div>
+              <>
+                <div>Correct!</div>
+              </>
             ) : (
               <div>Wrong!</div>
             )}
