@@ -1,16 +1,29 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const ButtonGroup = ({ colorCode }) => {
+const ButtonGroup = ({ colorCode, setSubmittedAnswer }) => {
+  const [disabled, setDisabled] = useState(false);
   const opt1 = generateColorCode();
   const opt2 = generateColorCode();
   const colors = [opt1, opt2, colorCode];
   const shuffled_colors = colors.sort((a, b) => 0.5 - Math.random());
 
+  useEffect(() => {
+    setDisabled(false);
+  }, [colorCode]);
+
   return (
     <div className="button-group">
       {shuffled_colors.map((k, i) => {
         return (
-          <button key={i} value={k}>
+          <button
+            key={i}
+            value={k}
+            disabled={disabled ? true : false}
+            onClick={() => {
+              setSubmittedAnswer(k);
+              setDisabled(true);
+            }}
+          >
             {k}
           </button>
         );
@@ -28,4 +41,4 @@ const generateColorCode = () => {
   return "#" + color_code;
 };
 
-export default ButtonGroup;
+export default React.memo(ButtonGroup);

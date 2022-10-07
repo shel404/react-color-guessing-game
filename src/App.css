@@ -9,7 +9,7 @@
   margin-top: 2.5rem;
   border-radius: 10px;
   padding: 1rem;
-  box-shadow: 5px 5px 20px #450a4e;
+  box-shadow: 3px 3px 20px #450a4e;
 }
 
 .color-box{
@@ -31,7 +31,7 @@ button {
   outline: none;
   border: 0;
   box-shadow: 2px 2px 5px #450a4e;
-  background-color: #b51273;
+  background-color: darkmagenta;
   color: white;
 }
 
@@ -42,4 +42,24 @@ button:hover, button:active{
 button:active{
   transform: translateY(2px);
   box-shadow: 0px 0px 0px;
+}
+
+button:disabled{
+  background-color: #9c9c9c;
+  box-shadow: 0px 0px 0px;
+  cursor: not-allowed;
+}
+
+.info-text{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  gap: 5px;
+}
+
+.scoreboard{
+  text-align: right;
+
 }
