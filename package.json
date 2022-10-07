@@ -34,5 +34,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "A simple color guuessing game made with react",
+  "main": "index.js",
+  "repository": "https://github.com/shel404/react-color-guessing-game.git",
+  "author": "Shoaib Elias <mishoel344@gmail.com>",
+  "license": "MIT"
 }
